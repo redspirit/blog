@@ -2,3 +2,13 @@
 <p>Name: {{name}}</p>
 
 {{#include}} last-posts.html {{/include}}
+
+{{#isHome}}
+    {{#post}}home{{/post}}
+    IS HOME
+{{/isHome}}
+
+{{^isHome}}
+    {{#post}}{{/post}}
+    IS POST
+{{/isHome}}
