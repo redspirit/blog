@@ -1,0 +1,6 @@
+# site settings
+theme: light
+destinationDir: public
+title: RedSpirit Blog
+description: My simple texts
+dateTimeFormat: YYYY.MM.DD
