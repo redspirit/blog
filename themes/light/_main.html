@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{title}}</title>
+    <title>Peach – Oddly Specific Programming Rants</title>
 
     <meta charset="utf-8" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <meta name="description" content="{{description}}">
-    <meta name="author" content="{{author}}" />
+
+    <meta name="description" content="Oddly Specific Programming Rants">
+    <meta property="og:description" content="Oddly Specific Programming Rants" />
+
+    <meta name="author" content="Peach" />
 
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
@@ -36,7 +39,16 @@
 <div id="main" role="main" class="container">
     <div class="posts">
 
-        {{#include}} post.html {{/include}}
+        <article class="post">
+
+            <h1><a href="/Back-To-The-Pand/">Back To The Pand</a></h1>
+
+            <div class="entry">
+                Return to form - with extra pandas
+            </div>
+
+            <a href="/Back-To-The-Pand/" class="read-more">Read More</a>
+        </article>
 
     </div>
 </div>
@@ -44,7 +56,8 @@
 <div class="wrapper-footer">
     <div class="container">
         <footer class="footer">
-            footer information
+            <a href="mailto:panda3ds.emu@gmail.com"><i class="svg-icon email"></i></a>
+            <a href="https://github.com/wheremyfoodat/wheremyfoodat.github.io"><i class="svg-icon github"></i></a>
         </footer>
     </div>
 </div>
