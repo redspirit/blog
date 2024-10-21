@@ -1,11 +1,8 @@
-title: hello
+title1: hello
 description: trololo
 url: main
-date: 05.12.2024 12:44
+date: 05.12.2024
 category: lifestyle
-tags: 
-    - home
-    - life
 
 +++++
 

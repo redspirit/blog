@@ -1,12 +1,23 @@
 const fs = require('fs');
 const pathLib = require('path');
 const Mustache = require('mustache');
+const PostsManager = require('./PostsManager');
 
-const getPages = () => {
-
-}
+const postsManager = new PostsManager('./pages');
 
 const start = async (themeDir, outputDir) => {
+
+    let pages = postsManager.readPages();
+
+
+
+    return console.log(pages);
+
+
+
+
+
+
     let mainTemplate = fs.readFileSync(pathLib.join(themeDir, 'tree.html')).toString();
 
     let view = {
