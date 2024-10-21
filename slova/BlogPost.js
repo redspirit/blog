@@ -4,6 +4,7 @@ const yaml = require('yaml');
 const moment = require('moment');
 const markdown = require('markdown-it')(); // https://www.npmjs.com/package/markdown-it
 const HTMLParser = require('node-html-parser');
+const { dateTimeFormat } = require('./config');
 
 const META_SEPARATOR = /\+{4,}/g;
 
@@ -49,13 +50,26 @@ class BlogPost {
         let dom = HTMLParser.parse(this.contentHtml);
         let headerText = dom.querySelector('h1')?.innerText || dom.querySelector('h2')?.innerText;
 
-        this.url = meta.url || fileDir; // либо путь до файла с подпапками
+        this.url = meta.url || fileDir;
         this.title = meta.title || headerText || fileName;
         this.description = meta.description || '';
         this.visible = typeof meta.visible === 'undefined' ? true : !!meta.visible;
-        this.dateTime = meta.date ? moment(meta.date) : moment(fileStat.birthtime);
+        this.dateTime = meta.date ? moment(meta.date, dateTimeFormat) : moment(fileStat.birthtime);
         this.category = null;
+    }
 
+    getView() {
+        return {
+            meta: this.meta,
+            url: this.url,
+            title: this.title,
+            description: this.description,
+            html: this.contentHtml,
+            visible: this.visible,
+            dateTime: this.dateTime,
+            category: this.category,
+            isEmpty: this.isEmpty,
+        }
     }
 }
 
