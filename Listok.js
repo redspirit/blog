@@ -18,13 +18,32 @@ class Listok {
         return params;
     }
 
-    render(template, view) {
-        this.template = template;
-        this.context = view;
+    parseSections(template, context) {
+        const sectionMatch = [...template.matchAll(this.sectionSearch)];
+        const section = sectionMatch[0];
+        if (section) {
+            let name = section[1];
+            let sectionReg = new RegExp(`{{\#${name}}}(.+){{\/${name}}}`, 'gi');
+            let subContext = get(context, name);
+            if(!subContext) return;
 
+            // todo test type of subContext
+
+            return template.replaceAll(sectionReg, (sect, body) => {
+                // console.log('s', sect);
+                // console.log('b', body);
+                return this.parseSections(body, subContext);
+            });
+
+        } else {
+            return this.renderTags(template, context);
+        }
+    }
+
+    renderTags(template, context) {
         // simple placeholder
-        this.template = this.template.replaceAll(this.tagReg, (tag, key) => {
-            let value = get(this.context, key);
+        template = template.replaceAll(this.tagReg, (tag, key) => {
+            let value = get(context, key);
             if(typeof value === 'string') {
                 return value;
             } else if (typeof value === 'function') {
@@ -35,8 +54,8 @@ class Listok {
         });
 
         // function with params
-        this.template = this.template.replaceAll(this.tagFuncReg, (tag, key, strParams) => {
-            let func = get(this.context, key);
+        template = template.replaceAll(this.tagFuncReg, (tag, key, strParams) => {
+            let func = get(context, key);
             if(typeof func === 'function') {
                 return func(this.parseFunctionParams(strParams));
             } else {
@@ -44,16 +63,13 @@ class Listok {
             }
         });
 
+        return template;
+    }
 
-        const sectionMatch = [...this.template.matchAll(this.sectionSearch)];
-        // let sectionMatch = this.sectionSearch.exec(this.template);
-        sectionMatch.forEach(section => {
-            let name = section[1];
-            console.log(name);
-        })
+    render(template, context) {
 
+        return this.parseSections(template, context);
 
-        return this.template;
     }
 
 }

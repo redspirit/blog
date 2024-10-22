@@ -11,7 +11,9 @@ let dataSource = (limit, sort) => {
 }
 
 const view = {
-    author: "Joe",
+    author: 'Joe',
+    booksArr: [{name: 'book 1'}, {name: 'book 2'}],
+    books: {name: 'book obj'},
     getItems: (params) => {
         return JSON.stringify(params)
     }
@@ -19,7 +21,7 @@ const view = {
 };
 
 // let tpl = '<p>Hello, {{author}}! {{getItems()}}</p>';
-let tpl = 'Last 3 items of <b>{{author}}</b>: {{#getitems}} <h1>{{name}}</h1> {{/getitems}}';
+let tpl = 'Last 3 items of <b>{{author}}</b>: {{#books}} <h1>{{name}}</h1> {{/books}}';
 
 let content = listok.render(tpl, view);
 
