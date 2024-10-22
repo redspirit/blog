@@ -9,6 +9,11 @@
 {{/isHome}}
 
 {{^isHome}}
-    {{#post}}{{/post}}
+    {{currentPost}}
+
+    {{#getPosts(size=3, sort=desc)}}
+        <h3>123</h3>
+    {{/getPosts}}
+
     IS POST
 {{/isHome}}
