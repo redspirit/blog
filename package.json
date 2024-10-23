@@ -9,13 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "get-value": "^3.0.1",
-    "install": "^0.13.0",
     "markdown-it": "^14.1.0",
     "moment": "^2.30.1",
-    "mustache": "^4.2.0",
     "node-html-parser": "^6.1.13",
-    "npm": "^10.9.0",
     "yaml": "^2.6.0"
   }
 }
