@@ -3,13 +3,16 @@ const get = require('get-value');
 class Listok {
     constructor() {
         this.tags = ['{{', '}}'];
-        this.tagReg = new RegExp(`${this.tags[0]}([a-z_. ]+?)${this.tags[1]}`, 'gi');
-        this.tagFuncReg = new RegExp(`${this.tags[0]}([a-z_. ]+?)\\((.*)\\)${this.tags[1]}`, 'gi');
-        this.sectionSearch = new RegExp(this.tags[0] + '\#([a-z_.]+?)' + this.tags[1], 'gi');
+        let tl = this.tags[0];
+        let tr = this.tags[1];
+
+        this.tagReg = new RegExp(`${tl}\\s*([a-z_.]+?)(\\(.*\\))?\\s*${tr}`, 'gi');
+        this.sectionReg = new RegExp(`${tl}\\s*#([a-z_.]+?)\\s*${tr}(.*)${tl}\\s*\\/\\1\\s*${tr}`, 'gis');
     }
 
     parseFunctionParams(str) {
         let params = {};
+        str = str.trim().slice(1,-1);
         str.split(',').forEach(p => {
             let chunks = p.trim().split('=');
             if (chunks[1])
@@ -18,58 +21,65 @@ class Listok {
         return params;
     }
 
-    parseSections(template, context) {
-        const sectionMatch = [...template.matchAll(this.sectionSearch)];
-        const section = sectionMatch[0];
-        if (section) {
-            let name = section[1];
-            let sectionReg = new RegExp(`{{\#${name}}}(.+){{\/${name}}}`, 'gi');
-            let subContext = get(context, name);
-            if(!subContext) return;
+    iterateContext(innerBody, subContext) {
+        if(typeof subContext === 'boolean') {    // is Boolean ????????????????
 
-            // todo test type of subContext
-
-            return template.replaceAll(sectionReg, (sect, body) => {
-                // console.log('s', sect);
-                // console.log('b', body);
-                return this.parseSections(body, subContext);
-            });
-
-        } else {
-            return this.renderTags(template, context);
+        } else if (Array.isArray(subContext)) {    // is array
+            let multiBody = '';
+            for(let item of subContext) {
+                multiBody += this.parseSections(innerBody, item);
+            }
+            return multiBody;
+        } else if (typeof subContext === 'function') {  // is function
+            let funcResult = subContext();
+            return this.iterateContext(innerBody, funcResult);
+        } else {        // is object
+            return this.parseSections(innerBody, subContext);
         }
     }
 
-    renderTags(template, context) {
-        // simple placeholder
-        template = template.replaceAll(this.tagReg, (tag, key) => {
-            let value = get(context, key);
-            if(typeof value === 'string') {
-                return value;
-            } else if (typeof value === 'function') {
-                return value();
-            } else {
-                return value ? value.toString() : '';
-            }
+    //  todo обработка любого контекста и удаление секции если контекст не истина
+
+    parseSections(template, context) {
+        template = template.replaceAll(this.sectionReg, (original, tagName, innerBody) => {
+            console.log({original, tagName, innerBody});
+            let subContext = get(context, tagName);
+            return this.iterateContext(innerBody, subContext);
         });
 
-        // function with params
-        template = template.replaceAll(this.tagFuncReg, (tag, key, strParams) => {
-            let func = get(context, key);
-            if(typeof func === 'function') {
-                return func(this.parseFunctionParams(strParams));
+        template = template.replaceAll(this.tagReg, (original, tagName, tagParams) => {
+            if (tagParams) {
+                return this.replaceFunction(context, tagName, tagParams);
             } else {
-                return '';
+                return this.replacePlaceholder(context, tagName);
             }
         });
 
         return template;
     }
 
+    replacePlaceholder(context, key) {
+        let value = get(context, key);
+        if(typeof value === 'string') {
+            return value;
+        } else if (typeof value === 'function') {
+            return value();
+        } else {
+            return value ? value.toString() : '???';
+        }
+    }
+
+    replaceFunction(context, key, tagParams) {
+        let func = get(context, key);
+        if(typeof func === 'function') {
+            return func(this.parseFunctionParams(tagParams));
+        } else {
+            return func.toString();
+        }
+    }
+
     render(template, context) {
-
         return this.parseSections(template, context);
-
     }
 
 }

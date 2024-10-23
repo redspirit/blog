@@ -1,3 +1,4 @@
+const fs = require('fs');
 const Listok = require('./Listok');
 
 let listok = new Listok();
@@ -11,18 +12,23 @@ let dataSource = (limit, sort) => {
 }
 
 const view = {
-    author: 'Joe',
+    menuTitle: 'The Blog!',
+    copyright: 'LISTOK.js',
+    author: (params) => {
+        return 'Red Spirit ' + JSON.stringify(params);
+    },
     booksArr: [{name: 'book 1'}, {name: 'book 2'}],
-    books: {name: 'book obj'},
-    getItems: (params) => {
-        return JSON.stringify(params)
+    booksObj: {name: 'For dummies )'},
+    booksFunc: () => {
+        return {name: 'Zloy Awaw'};
     }
 
 };
 
 // let tpl = '<p>Hello, {{author}}! {{getItems()}}</p>';
-let tpl = 'Last 3 items of <b>{{author}}</b>: {{#books}} <h1>{{name}}</h1> {{/books}}';
+// let tpl = 'Last 3 items of <b>{{header}}</b>: {{#books}} <h1>{{name}}</h1> {{/books}} <br> {{footer(name=123)}}';
+let tpl = fs.readFileSync('./themes/listok_test.html').toString();
 
 let content = listok.render(tpl, view);
-
+console.log('--------------------------------------------');
 console.log(content);
