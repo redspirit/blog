@@ -36,7 +36,7 @@
 <div id="main" role="main" class="container">
     <div class="posts">
 
-        {{#include}} post.html {{/include}}
+        {{include(post.html)}}
 
         {{#getPosts(size=3, sort=desc)}}
             <h3>1111</h3>

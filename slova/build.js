@@ -11,8 +11,8 @@ const start = async (themeDir, outputDir) => {
 
     pages.forEach(page => {
         renderer.setPage(page);
-        // console.log(renderer.getStatic());
-        renderer.getStatic();
+        console.log(renderer.getStatic());
+        // renderer.getStatic();
     });
 
 }
