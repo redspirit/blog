@@ -17,4 +17,6 @@ const start = async (themeDir, outputDir) => {
 
 }
 
-start('./themes/light', './dist').catch(console.error);
+module.exports = {
+    start
+}

@@ -1,6 +1,10 @@
 # site settings
-theme: light
-destinationDir: public
+themeDir: ./themes/light
+destinationDir: ./public
 title: RedSpirit Blog
 description: My simple texts
 dateTimeFormat: DD.MM.YYYY
+
+server:
+  enabled: true
+  port: 9090
