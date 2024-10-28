@@ -1,10 +1,15 @@
 # site settings
+pagesDir: ./pages # .md files here
 themeDir: ./themes/light
-destinationDir: ./public
-title: RedSpirit Blog
-description: My simple texts
+destinationDir: ./dist
 dateTimeFormat: DD.MM.YYYY
+rootFileName: index
 
-server:
-  enabled: true
-  port: 9090
+# static server
+serverEnable: false
+serverPort: 9090
+
+# common data for site
+context:
+  title: RedSpirit Blog
+  description: My simple texts

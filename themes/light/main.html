@@ -18,11 +18,11 @@
 <div class="wrapper-masthead">
     <div class="container">
         <header class="masthead clearfix">
-            <a href="/" class="site-avatar"><img src="https://avatars.githubusercontent.com/u/44909372?s=400&u=2bc9f9646046c58a2591ebfca814347266e3090a&v=4" /></a>
+            <a href="/" class="site-avatar"><img src="https://avatars.githubusercontent.com/u/744132?v=4" /></a>
 
             <div class="site-info">
-                <h1 class="site-name"><a href="/">Peach</a></h1>
-                <p class="site-description">Oddly Specific Programming Rants</p>
+                <h1 class="site-name"><a href="/">Spirit</a></h1>
+                <p class="site-description">Мой тестовый блог</p>
             </div>
 
             <nav>
@@ -36,11 +36,15 @@
 <div id="main" role="main" class="container">
     <div class="posts">
 
-        {{include(post.html)}}
+        {{#isHome}}
+            Домашняя (главная) страница
+            {{renderPage(name=home.md)}}
+        {{/isHome}}
 
-        {{#getPosts(size=3, sort=desc)}}
-            <h3>1111</h3>
-        {{/getPosts}}
+        {{#isPage}}
+            Страница md файла
+            {{include(post.html)}}
+        {{/isPage}}
 
     </div>
 </div>

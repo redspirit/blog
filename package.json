@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs-extra": "^11.2.0",
     "listok": "github:redspirit/listok",
     "markdown-it": "^14.1.0",
     "moment": "^2.30.1",

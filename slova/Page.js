@@ -1,14 +1,15 @@
-const { readFileSync, statSync } = require('fs');
 const path = require('path');
 const yaml = require('yaml');
 const moment = require('moment');
 const markdown = require('markdown-it')(); // https://www.npmjs.com/package/markdown-it
 const HTMLParser = require('node-html-parser');
+const { readFileSync, statSync } = require('fs');
 const { dateTimeFormat } = require('./config');
 
 const META_SEPARATOR = /\+{4,}/g;
 
-class BlogPost {
+class Page {
+    fileName = null;
     meta = null;
     url = null;
     title = null;
@@ -17,10 +18,32 @@ class BlogPost {
     contentHtml = null;
     visible = true;
     dateTime = null;
-    category = null;
     isEmpty = false;
+    isPage = false;
+    isHome = false;
+    isCategory = false;
 
-    constructor(filePath) {
+    static PAGE_TYPES = {
+        PAGE: 'page',
+        CATEGORY: 'category',
+        HOME: 'home',
+    };
+
+    constructor(filePath, pageType) {
+        if (filePath) {
+            this.isPage = Page.PAGE_TYPES.PAGE;
+            this.loadFile(filePath);
+        } else {
+            this.isEmpty = true;
+            if (pageType === Page.PAGE_TYPES.HOME) {
+                this.url = 'index';
+                this.isHome = true;
+            }
+            if (pageType === Page.PAGE_TYPES.CATEGORY) this.isCategory = true;
+        }
+    }
+
+    loadFile (filePath) {
         let filenameComponents = path.parse(filePath);
         let fileName = filenameComponents.name;
         let fileDirAbs = path.join(filenameComponents.dir, fileName);
@@ -43,6 +66,7 @@ class BlogPost {
             meta = yaml.parse(yml);
         }
 
+        this.fileName = fileDir + filenameComponents.ext;
         this.meta = meta;
         this.contentMd = document;
         this.contentHtml = markdown.render(document);
@@ -55,11 +79,11 @@ class BlogPost {
         this.description = meta.description || '';
         this.visible = typeof meta.visible === 'undefined' ? true : !!meta.visible;
         this.dateTime = meta.date ? moment(meta.date, dateTimeFormat) : moment(fileStat.birthtime);
-        this.category = null;
     }
 
-    getView() {
+    getView () {
         return {
+            fileName: this.fileName,
             meta: this.meta,
             url: this.url,
             title: this.title,
@@ -67,10 +91,12 @@ class BlogPost {
             html: this.contentHtml,
             visible: this.visible,
             dateTime: this.dateTime,
-            category: this.category,
             isEmpty: this.isEmpty,
+            isPage: this.isPage,
+            isHome: this.isHome,
+            isCategory: this.isCategory,
         }
     }
 }
 
-module.exports = BlogPost;
+module.exports = Page;

@@ -1,8 +1,7 @@
-title1: hello
+title: hello
 description: trololo
 url: main
 date: 05.12.2024
-category: lifestyle
 
 +++++
 

@@ -1,20 +1,29 @@
-const PostsManager = require('./PostsManager');
+const fse = require('fs-extra');
+const path = require('path');
+const config = require('./config');
+const PagesManager = require('./PagesManager');
 const Renderer = require('./Renderer');
 
-const postsManager = new PostsManager('./pages');
+const pagesManager = new PagesManager(config.pagesDir);
 
-const start = async (themeDir, outputDir) => {
+const copyFromTheme = (sourceDir, destDist, name) => {
+    return fse.copySync(path.join(sourceDir, name), path.join(destDist, name));
+}
 
-    let pages = postsManager.readPages();
+const start = async () => {
+    const themeDir = config.themeDir;
+    const outputDir = config.destinationDir;
 
-    let renderer = new Renderer(themeDir);
+    fse.emptyDirSync(outputDir);
+    copyFromTheme(themeDir, outputDir, 'css');
+    // todo надо копировать все файлы кроме .html и .htm
 
-    pages.forEach(page => {
-        renderer.setPage(page);
-        console.log(renderer.getStatic());
-        // renderer.getStatic();
-    });
+    let renderer = new Renderer(themeDir, outputDir);
+    renderer.setContext(config.context);
+    renderer.generateStatic(pagesManager);
 
+
+    console.log('Done');
 }
 
 module.exports = {
