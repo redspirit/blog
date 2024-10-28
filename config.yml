@@ -4,9 +4,10 @@ themeDir: ./themes/light
 destinationDir: ./dist
 dateTimeFormat: DD.MM.YYYY
 rootFileName: index
+debug: true
 
 # static server
-serverEnable: false
+serverEnable: true
 serverPort: 9090
 
 # common data for site

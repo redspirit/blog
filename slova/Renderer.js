@@ -33,6 +33,7 @@ class Renderer {
 
         pages.forEach(page => {
             let pageCtx = Object.assign(this.context, page.getView());
+            console.log(pageCtx);
             this.saveStatic(page.url + '.html',  pageCtx);
         });
     }
