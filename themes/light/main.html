@@ -36,15 +36,15 @@
 <div id="main" role="main" class="container">
     <div class="posts">
 
-        {{#isHome}}
+        {{#page.isHome}}
             Домашняя (главная) страница
             {{renderPage(name=home.md)}}
-        {{/isHome}}
+        {{/page.isHome}}
 
-        {{#isPage}}
+        {{#page.isPage}}
             Страница md файла
             {{include(post.html)}}
-        {{/isPage}}
+        {{/page.isPage}}
 
     </div>
 </div>

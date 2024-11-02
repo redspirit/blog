@@ -27,12 +27,13 @@ class Renderer {
 
         this.context.renderPage = ({name}) => {
             // в name путь до .md файла
-            let page = pageManager.findByFileName(name)
-            return page ? page.getView() : '';
+            let page = pageManager.findByFileName(name);
+            if (!page) return '';
+            return Object.assign(this.context, {page: page.getView()});
         }
 
         pages.forEach(page => {
-            let pageCtx = Object.assign(this.context, page.getView());
+            let pageCtx = Object.assign(this.context, {page: page.getView()});
             console.log(pageCtx);
             this.saveStatic(page.url + '.html',  pageCtx);
         });
