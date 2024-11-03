@@ -27,7 +27,7 @@
 
             <nav>
                 <a href="/">Blog</a>
-                <a href="/about">About</a>
+                <a href="/about.html">About</a>
             </nav>
         </header>
     </div>
@@ -36,15 +36,15 @@
 <div id="main" role="main" class="container">
     <div class="posts">
 
-        {{#page.isHome}}
-            Домашняя (главная) страница
-            {{renderPage(name=home.md)}}
-        {{/page.isHome}}
+        {{#isHome}}
+            Давайте тут будет список из 5 последних постов?
+            <p>Кстати вот <a href="/post1.html">пост 1</a></p>
+            <p>А вот <a href="/post2.html">пост 2</a></p>
+        {{/isHome}}
 
-        {{#page.isPage}}
-            Страница md файла
-            {{include(post.html)}}
-        {{/page.isPage}}
+        {{#isPage}}
+            {{$html}}
+        {{/isPage}}
 
     </div>
 </div>

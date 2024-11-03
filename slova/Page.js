@@ -6,7 +6,7 @@ const HTMLParser = require('node-html-parser');
 const { readFileSync, statSync } = require('fs');
 const { dateTimeFormat } = require('./config');
 
-const META_SEPARATOR = /\+{4,}/g;
+
 
 class Page {
     fileName = null;
@@ -44,6 +44,7 @@ class Page {
     }
 
     loadFile (filePath) {
+        const META_SEPARATOR = /-{4,}/gm;
         let filenameComponents = path.parse(filePath);
         let fileName = filenameComponents.name;
         let fileDirAbs = path.join(filenameComponents.dir, fileName);

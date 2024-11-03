@@ -15,6 +15,18 @@ const copyDirectoryRecursive = (sourceDir, destDir, exclude) => {
         }
     }
 }
+
+const mergeObjects = (target, source) => {
+    const result = { ...target };
+    for (const key in source) {
+        if (source[key] !== null && source[key] !== undefined) {
+            result[key] = source[key];
+        }
+    }
+    return result;
+}
+
 module.exports = {
-    copyDirectoryRecursive
+    copyDirectoryRecursive,
+    mergeObjects,
 }
