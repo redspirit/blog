@@ -26,7 +26,28 @@ const mergeObjects = (target, source) => {
     return result;
 }
 
+const sortCollection = (arr, key, order = 'asc') => {
+    return arr.sort((a, b) => {
+        if (order === 'asc') {
+            return a[key] - b[key];
+        } else {
+            return b[key] - a[key];
+        }
+    });
+}
+
+const objectDefaults = (objA, objB) => {
+    for (const key in objB) {
+        if (typeof objA[key] === 'undefined' || objA[key] === undefined) {
+            objA[key] = objB[key];
+        }
+    }
+    return objA;
+}
+
 module.exports = {
     copyDirectoryRecursive,
     mergeObjects,
+    sortCollection,
+    objectDefaults,
 }

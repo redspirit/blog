@@ -1,5 +1,5 @@
 const path = require('path');
-const Listok = require('listok');
+const Listok = require('listok.js');
 const { outputFileSync } = require('fs-extra');
 const { mergeObjects } = require('./utils');
 
@@ -26,15 +26,19 @@ class Renderer {
     generateStatic (pageManager) {
         let pages = pageManager.getAllPages();
 
-        this.context.renderPage = ({name}) => {
+        this.listok.defineFunction('renderPage', ({name}) => {
             // в name путь до .md файла
             let page = pageManager.findByFileName(name)
             return page ? page.getView() : '';
-        }
+        })
 
-        this.context.getPages = ({sort, limit}) => {
-            return  '';
-        }
+        this.listok.defineFunction('getPages', ({sortBy, sortDir, limit}) => {
+            return pageManager.getPagesByFilter({
+                limit,
+                sortBy,
+                sortDir,
+            });
+        })
 
         pages.forEach(page => {
             // console.log('----------------');

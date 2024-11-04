@@ -1,6 +1,7 @@
 const { join } = require('path');
 const { readdirSync, statSync } = require('fs');
 const Page = require('./Page');
+const { sortCollection, objectDefaults } = require('./utils');
 
 class PagesManager {
     constructor(postsDir) {
@@ -45,6 +46,30 @@ class PagesManager {
     getAllPages() {
         let homePage = new Page(null, Page.PAGE_TYPES.HOME); // add home page
         return [...this.pages, homePage];
+    }
+
+    /*
+        params.limit=10
+        params.sortBy=dateTime
+        params.sortDir=desc
+        params.category
+     */
+    getPagesByFilter(params = {}) {
+        const {limit, sortBy, sortDir, category} = objectDefaults(params, {
+            limit: 10,
+            sortBy: 'dateTime',
+            sortDir: 'desc',
+            category: null,
+        });
+
+        let list = sortCollection([...this.pages], sortBy, sortDir);
+
+        return list.filter(page => {
+            if(category) {
+                return category === page.category;
+            }
+            return true;
+        }).slice(0, parseInt(limit));
     }
 }
 
