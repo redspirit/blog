@@ -45,7 +45,7 @@ class PagesManager {
 
     getAllPages() {
         let homePage = new Page(null, Page.PAGE_TYPES.HOME); // add home page
-        return [...this.pages, homePage];
+        return [...this.pages, homePage].filter(p => p.visible);
     }
 
     /*
@@ -65,7 +65,8 @@ class PagesManager {
         let list = sortCollection([...this.pages], sortBy, sortDir);
 
         return list.filter(page => {
-            if(category) {
+            if (!page.visible) return false;
+            if (category) {
                 return category === page.category;
             }
             return true;

@@ -5,8 +5,7 @@ const markdown = require('markdown-it')(); // https://www.npmjs.com/package/mark
 const HTMLParser = require('node-html-parser');
 const { readFileSync, statSync } = require('fs');
 const { dateTimeFormat } = require('./config');
-
-
+const { extractDateAndName } = require('./utils');
 
 class Page {
     fileName = null;
@@ -46,7 +45,8 @@ class Page {
     loadFile (filePath) {
         const META_SEPARATOR = /-{4,}/gm;
         let filenameComponents = path.parse(filePath);
-        let fileName = filenameComponents.name;
+        let {name: fileName, date: dateInName} = extractDateAndName(filenameComponents.name);
+
         let fileDirAbs = path.join(filenameComponents.dir, fileName);
         let fileDir = fileDirAbs.split(path.sep).slice(1).join('/'); // remove first "pages/"
         let fileContent = readFileSync(filePath).toString();
@@ -72,6 +72,8 @@ class Page {
         this.contentMd = document;
         this.contentHtml = markdown.render(document);
 
+        //
+
         let dom = HTMLParser.parse(this.contentHtml);
         let headerText = dom.querySelector('h1')?.innerText || dom.querySelector('h2')?.innerText;
 
@@ -79,7 +81,12 @@ class Page {
         this.title = meta.title || headerText || fileName;
         this.description = meta.description || '';
         this.visible = typeof meta.visible === 'undefined' ? true : !!meta.visible;
-        this.dateTime = meta.date ? moment(meta.date, dateTimeFormat) : moment(fileStat.birthtime);
+        this.dateTime = meta.date
+            ? moment(meta.date, dateTimeFormat)
+            : (dateInName
+                ? moment(dateInName)
+                : moment(fileStat.birthtime)
+            );
     }
 
     getView () {

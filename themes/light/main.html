@@ -43,14 +43,21 @@
 
             <ul>
             {{#getPages(limit=3)}}
-                <li><a href="/{{url}}.html">{{title}}</a></li>
+                <li><a href="/{{url}}.html">{{title}}</a> ({{dateTime(format=DD.MM.YYYY)}})</li>
             {{/getPages}}
             </ul>
 
         {{/isHome}}
 
         {{#isPage}}
-            {{$html}}
+
+            <p>
+                ({{dateTime(format=DD.MM.YYYY)}})
+            </p>
+            <article>
+                {{$html}}
+            </article>
+
         {{/isPage}}
 
     </div>
@@ -59,7 +66,7 @@
 <div class="wrapper-footer">
     <div class="container">
         <footer class="footer">
-            footer information
+            Powered by <a href="#">Slova</a>
         </footer>
     </div>
 </div>

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
 
 const copyDirectoryRecursive = (sourceDir, destDir, exclude) => {
     fs.mkdirSync(destDir, { recursive: true });
@@ -45,9 +46,27 @@ const objectDefaults = (objA, objB) => {
     return objA;
 }
 
+const extractDateAndName = (fileName) => {
+    const parts = fileName.split(/[_.-]/g);
+    if (parts[0].length === 4 && parts[1].length === 2 && parts[2].length === 2) {
+        let dateStr = parts.slice(0, 3).join('-');
+        let md = moment(dateStr, 'YYYY-MM-DD');
+        return {
+            date: md.isValid() ? md.toDate() : null,
+            name: parts.slice(3).join('-')
+        };
+    } else {
+        return {
+            date: null,
+            name: fileName.split(/[_.-]/g).join('-')
+        };
+    }
+}
+
 module.exports = {
     copyDirectoryRecursive,
     mergeObjects,
     sortCollection,
     objectDefaults,
+    extractDateAndName,
 }

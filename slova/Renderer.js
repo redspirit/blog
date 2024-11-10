@@ -40,6 +40,10 @@ class Renderer {
             });
         })
 
+        this.listok.defineFunction('dateTime', ({format}, ctx) => {
+            return ctx.dateTime.format(format);
+        })
+
         pages.forEach(page => {
             // console.log('----------------');
             // console.log(this.context, page.getView());
