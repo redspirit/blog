@@ -38,12 +38,10 @@
 
         {{#isHome}}
             Давайте тут будет список из 5 последних постов?
-            <p>Кстати вот <a href="/post1.html">пост 1</a></p>
-            <p>А вот <a href="/post2.html">пост 2</a></p>
 
             <ul>
-            {{#getPages(limit=3)}}
-                <li><a href="/{{url}}.html">{{title}}</a> ({{dateTime(format=DD.MM.YYYY)}})</li>
+            {{#getPages(limit=5)}}
+                <li><a href="/{{url}}.html">{{title}}</a> ({{dateTimeFormat(format=DD.MM.YYYY)}})</li>
             {{/getPages}}
             </ul>
 
@@ -52,10 +50,10 @@
         {{#isPage}}
 
             <p>
-                ({{dateTime(format=DD.MM.YYYY)}})
+                ({{dateTimeFormat(format=DD.MM.YYYY)}})
             </p>
             <article>
-                {{$html}}
+                {{html}}
             </article>
 
         {{/isPage}}
@@ -66,7 +64,7 @@
 <div class="wrapper-footer">
     <div class="container">
         <footer class="footer">
-            Powered by <a href="#">Slova</a>
+            Powered by <a href="https://github.com/redspirit/slova" target="_blank">Slova</a>
         </footer>
     </div>
 </div>

@@ -40,8 +40,8 @@ class Renderer {
             });
         })
 
-        this.listok.defineFunction('dateTime', ({format}, ctx) => {
-            return ctx.dateTime.format(format);
+        this.listok.defineFunction('dateTimeFormat', ({format}, ctx, rootCtx) => {
+            return rootCtx.dateTime.format(format);
         })
 
         pages.forEach(page => {
