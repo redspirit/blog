@@ -7,8 +7,8 @@ rootFileName: index
 debug: true
 
 # static server
-serverEnable: true
-serverPort: 9090
+#serverEnable: true
+#serverPort: 9090
 
 # common data for site
 context:
