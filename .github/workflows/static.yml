@@ -28,7 +28,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Slova generate HTML
-        uses: redspirit/slova@v1.4
+        uses: redspirit/slova@v1.5
         with:
           config: slova.yml
           path: './dist/'
