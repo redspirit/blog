@@ -266,11 +266,14 @@ nav {
     }
 }
 nav a {
-    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3px;
     color: #333;
     text-align: right;
     font-weight: 300;
+    vertical-align: top;
     letter-spacing: 1px;
+    display: inline-block;
 }
 @media screen and (max-width: 640px) {
     nav a {
@@ -313,8 +316,9 @@ nav a {
 }
 
 footer {
-    padding: 20px 0;
+    padding: 15px 0;
     text-align: center;
+    font-size: 12pt;
 }
 
 .highlight {

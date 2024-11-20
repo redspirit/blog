@@ -1,0 +1,87 @@
+#wrapDarkLightSwitch {
+    display: inline-block;
+    position: relative;
+    user-select: none
+}
+#darkLightSwitch {
+    cursor: pointer;
+    padding: 4px 5px 2px;
+    position: relative;
+    display: inline-block
+}
+#darkLightSwitch svg {
+    fill: #000;
+    height: 24px;
+    width: 24px;
+    transition: all 1s
+}
+.darkModeOn #darkLightSwitch svg{
+    fill:#FFF
+}
+#darkLightSvgWrap{
+    height:24px;
+    width:24px;
+    overflow:hidden;
+    position:relative;
+    transition:all 0.3s;
+    margin-bottom:5px
+}
+#darkLightSwitch:hover #darkLightSvgWrap{
+    transform:scale(1) rotate(45deg)
+}
+.darkModeOn #darkLightSvgWrap svg{
+    height:44px;
+    width:44px;
+    position:absolute;
+    transition:all 0.5s;
+    top:-10px;
+    right:-10px
+}
+.darkModeOn #darkLightSvgWrap{
+    border-radius:10px
+}
+#darkLightOverlay {
+    width: 6px;
+    height: 10px;
+    position: absolute;
+    background: #FFF;
+    transition: all 0.5s;
+    top: 11px;
+    left: 16px;
+    border-radius: 0 10px 10px 0;
+}
+.darkModeOn #darkLightOverlay{
+    width:22px;
+    height:22px;
+    border-radius:20px;
+    top:0;
+    left:0;
+    background: #456;
+}
+/*Your custom theme styles below this*/
+
+body.darkModeOn {
+    background:#456;
+    color:#dedede
+}
+
+body.darkModeOn h1 a {
+    color: #fff;
+}
+
+body.darkModeOn .site-description {
+    color: #dedede;
+}
+body.darkModeOn nav a {
+    color: #fff;
+}
+
+body.darkModeOn .masthead {
+    border-bottom: 1px solid #212f3a;
+}
+
+body.darkModeOn .wrapper-footer {
+    border-top: 1px solid #212f3a;
+    border-bottom: 1px solid #212f3a;
+    background-color: #2e3b46;
+}
