@@ -42,7 +42,7 @@
 
             <div class="site-info">
                 <h1 class="site-name"><a href="/">RedSpirit</a></h1>
-                <p class="site-description">Семья, работа и хобби</p>
+                <p class="site-description">Строки & События</p>
             </div>
 
             <nav>
@@ -99,9 +99,16 @@
 </div>
 
 <script type="text/javascript">
+    let darkModeOn = localStorage.getItem('darkMode') === 'true';
+
+    if (darkModeOn) {
+        document.body.classList.add('darkModeOn');
+    }
+
     document.getElementById('wrapDarkLightSwitch').onclick = function() {
         document.body.classList.toggle('darkModeOn');
-    }
+        localStorage.setItem('darkMode', document.body.classList.contains('darkModeOn'));
+    };
 </script>
 
 </body>
