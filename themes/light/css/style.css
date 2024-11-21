@@ -65,7 +65,7 @@ html {
 
 body {
     background: #fff;
-    font: 18px/1.4 Helvetica, Arial, sans-serif;
+    font: 18px/1.4 "Inter", sans-serif;
     color: #333;
     font-weight: 300;
 }
@@ -78,7 +78,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     color: #222;
     font-weight: bold;
     line-height: 1.7;
@@ -235,7 +235,7 @@ img {
     margin: 0;
     color: #333;
     cursor: pointer;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 28px;
     letter-spacing: 1px;
@@ -255,7 +255,7 @@ img {
 nav {
     float: right;
     margin-top: 23px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 18px;
 }
 @media screen and (max-width: 640px) {
