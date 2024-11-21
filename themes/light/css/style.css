@@ -79,8 +79,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Inter", sans-serif;
-    color: #222;
-    font-weight: bold;
+    font-weight: 400;
     line-height: 1.7;
     margin: 1em 0 15px;
     padding: 0;
@@ -92,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 34px;
 }
 h1 a {
     color: inherit;
@@ -676,4 +675,10 @@ code {
 /* Name.Variable.Instance */
 .highlight .il {
     color: #2AA198;
+}
+
+.post-date {
+    font-size: 13px;
+    text-align: right;
+    margin: 0;
 }

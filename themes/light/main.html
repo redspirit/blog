@@ -17,8 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <link rel="icon" href="https://redspirit.ru/favicon.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="/css/style.css?1" />
-    <link rel="stylesheet" type="text/css" href="/css/dark-light.css?1" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css?2" />
+    <link rel="stylesheet" type="text/css" href="/css/dark-light.css?2" />
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
@@ -83,9 +83,9 @@
 
         {{#isPage}}
 
-            <p>
-                ({{dateTimeFormat(format=DD.MM.YYYY)}})
-            </p>
+            <div class="post-date">
+                {{dateTimeFormat(format=DD.MM.YYYY)}}
+            </div>
             <article>
                 {{html}}
             </article>
