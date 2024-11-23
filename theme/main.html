@@ -17,8 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <link rel="icon" href="https://redspirit.ru/favicon.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="/css/style.css?2" />
-    <link rel="stylesheet" type="text/css" href="/css/dark-light.css?2" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css?{{randomNum}}" />
+    <link rel="stylesheet" type="text/css" href="/css/dark-light.css?{{randomNum}}" />
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
@@ -71,13 +71,15 @@
     <div class="posts">
 
         {{#isHome}}
-            Главная страница еще в разработке...
+            <h1>Последние посты</h1>
 
+            <div class="last-posts">
             <ul>
             {{#getPages(limit=5)}}
                 <li><a href="/{{url}}.html">{{title}}</a> ({{dateTimeFormat(format=DD.MM.YYYY)}})</li>
             {{/getPages}}
             </ul>
+            </div>
 
         {{/isHome}}
 

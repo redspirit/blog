@@ -28,15 +28,17 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Slova generate HTML
-        uses: redspirit/slova@v1.6
+        uses: redspirit/slova@v1.8
         with:
-          config: slova.yml
-          path: './dist/'
+          context: ./blog.yml
+          path: './public/'
+          pages: './pages/'
+          theme: './theme/'
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/'
+          path: './public/'
           
       - name: Deploy to GitHub Pages
         id: deployment
