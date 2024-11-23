@@ -84,14 +84,13 @@
         {{/isHome}}
 
         {{#isPage}}
-
-            <div class="post-date">
-                {{dateTimeFormat(format=DD.MM.YYYY)}}
-            </div>
             <article>
-                {{html}}
+                <h1>{{title}}</h1>
+                <div class="post-date">
+                    {{dateTimeFormat(format=DD.MM.YYYY)}}
+                </div>
+                {{bodyHtml}}
             </article>
-
         {{/isPage}}
 
     </div>
