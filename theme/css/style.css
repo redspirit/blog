@@ -64,7 +64,7 @@ html {
 }
 
 body {
-    background: #fff;
+    background: #f9f9f9;
     font: 18px/1.4 "Inter", sans-serif;
     color: #333;
     font-weight: 300;
@@ -678,7 +678,5 @@ code {
 }
 
 .post-date {
-    font-size: 13px;
-    text-align: right;
-    margin: 0;
+    font-size: 15px;
 }
