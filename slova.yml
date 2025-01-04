@@ -1,3 +1,4 @@
-siteTitle: RedSpirit Blog
-siteDescription: Личный блог
 themeDir: ./theme
+context:
+  siteTitle: RedSpirit Blog
+  siteDescription: Личный блог
