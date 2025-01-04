@@ -1,5 +1,4 @@
 visible: true
-url: kak-ya-sdelal-svoy-blog
 
 -----
 
