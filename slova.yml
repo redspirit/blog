@@ -1,4 +1,3 @@
+# это файл настроек
 themeDir: ./theme
-context:
-  siteTitle: RedSpirit Blog
-  siteDescription: Личный блог
+_contextFile: ./blog.yml
